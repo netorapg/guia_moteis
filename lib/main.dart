@@ -19,7 +19,7 @@ class MotelApp extends StatelessWidget {
         scaffoldBackgroundColor: AppColors.white,
         appBarTheme: AppBarTheme(backgroundColor: AppColors.primary, foregroundColor: AppColors.white),
       ),
-      home: MotelListScreen(),
+      home: MotelList(),
     );
   }
 }
