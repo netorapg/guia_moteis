@@ -1,28 +1,25 @@
 import 'dart:convert';
-import 'package:flutter/foundation.dart';
-
-import '../../core/http_client.dart';
+import '../../core/http_client.dart'; // O seu HttpClient customizado
 import '../models/motel_model.dart';
 
 class MotelService {
   static const String apiUrl = "https://www.jsonkeeper.com/b/1IXK";
 
-  Future<List<MotelModel>> fetchMotels({int page = 1}) async {
+  Future<List<MotelModel>> fetchMotels() async {
     try {
-      // Inclui o parâmetro de página na URL
-      final response = await HttpClient.get('$apiUrl?page=$page'); 
+      final response = await HttpClient.get(apiUrl); // Usando o HttpClient customizado
 
       if (response.statusCode == 200) {
-        final Map<String, dynamic> data = jsonDecode(response.body);
+        // Garantir que a resposta seja tratada corretamente em UTF-8
+        final utf8Body = utf8.decode(response.bodyBytes);
+
+        // Decodifica o JSON após a conversão para UTF-8
+        final Map<String, dynamic> data = jsonDecode(utf8Body);
 
         // Acessamos "data" -> "moteis"
         if (data.containsKey("data") && data["data"].containsKey("moteis")) {
           final List<dynamic> motelsJson = data["data"]["moteis"];
-             if (kDebugMode) {
-              print(data);
-            }  // Imprime a resposta da API
-          return MotelModel.fromJsonList(motelsJson);  // Retorna a lista de motéis
-         
+          return MotelModel.fromJsonList(motelsJson);
         } else {
           throw Exception("Formato de resposta inválido: chave 'moteis' não encontrada");
         }

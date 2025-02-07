@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../data/models/motel_model.dart';
+import '../widgets/suite_card.dart'; // Importando o card da suíte
 
 class MotelDetailsScreen extends StatelessWidget {
   final MotelModel motel;
@@ -18,30 +19,7 @@ class MotelDetailsScreen extends StatelessWidget {
               itemCount: motel.suites.length,
               itemBuilder: (context, index) {
                 final suite = motel.suites[index];
-                return Card(
-                  margin: const EdgeInsets.all(8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Image.network(
-                        suite.fotos[0],
-                        height: 150,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(suite.nome, style: Theme.of(context).textTheme.titleLarge),
-                            Text('R\$ ${suite.valorTotal.toStringAsFixed(2)}', style: TextStyle(color: Colors.red)),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                );
+                return SuiteCard(suite: suite); // Usando o SuiteCard aqui
               },
             ),
     );
