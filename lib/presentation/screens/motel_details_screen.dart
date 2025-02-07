@@ -19,7 +19,7 @@ class MotelDetailsScreen extends StatelessWidget {
               itemCount: motel.suites.length,
               itemBuilder: (context, index) {
                 final suite = motel.suites[index];
-                return SuiteCard(suite: suite); // Usando o SuiteCard aqui
+                return SuiteCard(suite: suite);
               },
             ),
     );
