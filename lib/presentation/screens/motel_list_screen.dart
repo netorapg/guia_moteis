@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/theme.dart';
 import '../../data/services/motel_service.dart';
 import '../../data/models/motel_model.dart';
 import '../widgets/motel_card.dart';
@@ -23,7 +24,19 @@ class _MotelListState extends State<MotelList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Motéis'),
+        title: const Text('Guia de Motéis'),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                AppColors.primary,
+                AppColors.secondary,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
       ),
       body: FutureBuilder<List<MotelModel>>(
         future: motels,

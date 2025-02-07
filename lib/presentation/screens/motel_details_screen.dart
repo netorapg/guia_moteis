@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/theme.dart';
 import '../../data/models/motel_model.dart';
 import '../widgets/suite_card.dart'; // Importando o card da suíte
 
@@ -12,6 +13,18 @@ class MotelDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(motel.fantasia),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                AppColors.primary,
+                AppColors.secondary,
+              ],
+            ),
+          ),
+        ),
       ),
       body: motel.suites.isEmpty
           ? const Center(child: Text('Nenhuma suíte disponível'))
