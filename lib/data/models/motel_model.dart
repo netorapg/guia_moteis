@@ -1,22 +1,26 @@
-import 'dart:convert';
-
 class MotelModel {
-  final String nome;
-  final double preco;
-  final String imagemUrl;
+  final String fantasia;
+  final String logo;
+  final String bairro;
+  final double distancia;
 
-  MotelModel({required this.nome, required this.preco, required this.imagemUrl});
+  MotelModel({
+    required this.fantasia,
+    required this.logo,
+    required this.bairro,
+    required this.distancia,
+  });
 
   factory MotelModel.fromJson(Map<String, dynamic> json) {
     return MotelModel(
-      nome: json['nome'],
-      preco: (json['preco'] as num).toDouble(),
-      imagemUrl: json['imagem'],
+      fantasia: json["fantasia"] ?? "",
+      logo: json["logo"] ?? "",
+      bairro: json["bairro"] ?? "",
+      distancia: (json["distancia"] ?? 0).toDouble(),
     );
   }
 
-  static List<MotelModel> fromJsonList(String jsonStr) {
-    final List<dynamic> jsonList = json.decode(jsonStr);
-    return jsonList.map((json) => MotelModel.fromJson(json)).toList();
+  static List<MotelModel> fromJsonList(List<dynamic> list) {
+    return list.map((item) => MotelModel.fromJson(item)).toList();
   }
 }
