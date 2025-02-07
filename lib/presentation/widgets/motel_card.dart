@@ -13,27 +13,26 @@ class MotelCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.network(
-            motel.logo,  // Usando o logo como imagem do motel
-            height: 150, 
-            width: double.infinity, 
-            fit: BoxFit.cover,
-          ),
+          // Exibe o logo do motel
+          Image.network(motel.logo, height: 150, width: double.infinity, fit: BoxFit.cover),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                // Nome fantasia do motel
                 Text(
-                  motel.fantasia,  // Usando o nome fantasia como o nome do motel
+                  motel.fantasia,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
+                // Bairro onde o motel está localizado
                 Text(
-                  'Distância: ${motel.distancia.toStringAsFixed(2)} km',  // Mostrando a distância
-                  style: TextStyle(color: Colors.red),
+                  motel.bairro,
+                  style: TextStyle(color: Colors.grey),
                 ),
+                // Distância do motel
                 Text(
-                  'Bairro: ${motel.bairro}',  // Exibindo o bairro
+                  'Distância: ${motel.distancia.toStringAsFixed(2)} km',
                   style: TextStyle(color: Colors.grey),
                 ),
               ],
