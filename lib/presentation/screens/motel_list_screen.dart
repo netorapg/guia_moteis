@@ -24,7 +24,10 @@ class _MotelListState extends State<MotelList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Guia de Motéis'),
+        title: Image.asset(
+          'assets/images/logo.png',
+          height: 40, // Defina o tamanho que você deseja
+        ),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(

@@ -86,7 +86,18 @@ class MotelCard extends StatelessWidget {
                           ),
                       overflow: TextOverflow.ellipsis, // Truncar o texto
                     ),
-                    const SizedBox(height: 4),
+                       const SizedBox(height: 1), // Espaço entre as informações e as avaliações
+                    Row(
+                      children: [
+                        const Icon(LucideIcons.star, size: 16, color: Colors.amber),
+                        const SizedBox(width: 4),
+                        Text(
+                          '${motel.avaliacoes} Avaliações', // Quantidade de avaliações
+                          style: const TextStyle(color: Colors.grey),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
                     Row(
                       children: [
                         const Icon(LucideIcons.mapPin, size: 16, color: Colors.grey),
@@ -129,6 +140,7 @@ class MotelCard extends StatelessWidget {
                         ),
                       ],
                     ),
+                 
                   ],
                 ),
               ),
