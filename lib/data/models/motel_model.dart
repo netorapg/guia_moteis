@@ -16,14 +16,13 @@ class MotelModel {
   });
 
   factory MotelModel.fromJson(Map<String, dynamic> json) {
-    var suiteList = (json["suites"] as List).map((suiteJson) => Suite.fromJson(suiteJson)).toList();
-
+  final suitesData = json["suites"] as List? ?? [];
     return MotelModel(
       fantasia: json["fantasia"] ?? "",
       logo: json["logo"] ?? "",
       bairro: json["bairro"] ?? "",
       distancia: (json["distancia"] ?? 0).toDouble(),
-      suites: suiteList,
+      suites: suitesData.map((suiteJson) => Suite.fromJson(suiteJson)).toList(),
     );
   }
 
