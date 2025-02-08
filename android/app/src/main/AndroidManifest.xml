@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="guia_moteis"
+        android:label="Guia de Motéis"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

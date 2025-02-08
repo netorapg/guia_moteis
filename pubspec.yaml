@@ -45,6 +45,8 @@ dev_dependencies:
     sdk: flutter
   mockito: ^5.4.5
   build_runner: ^2.4.14
+  flutter_launcher_icons: ^0.14.3
+  
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -67,6 +69,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/logo.png
+    - assets/images/logoApp.png
+    - assets/images/logoAppPreto.png
+    - assets/images/guialogo.jpeg
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
@@ -95,3 +100,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/guialogo.jpeg"

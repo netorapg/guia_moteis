@@ -13,6 +13,7 @@ class MotelApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Motel App',
       theme: ThemeData(
         primaryColor: AppColors.primary,
