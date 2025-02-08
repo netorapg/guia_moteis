@@ -121,7 +121,7 @@ class SuiteCard extends StatelessWidget {
                         const Divider(), // Linha separadora entre os períodos
                       ],
                     );
-                  }).toList()
+                  })
                 else
                   const Padding(
                     padding: EdgeInsets.symmetric(vertical: 12),
