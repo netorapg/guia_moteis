@@ -70,17 +70,28 @@ void main() {
 
     test('should throw exception when response has invalid structure',
         () async {
-      final mockResponse = utf8.encode(json.encode({
+      // Simula uma resposta com estrutura inválida (moteis como string ao invés de lista)
+      final mockResponse = json.encode({
         "sucesso": true,
         "data": {"moteis": "não sou uma lista"} // Estrutura inválida
-      }));
+      });
 
       when(mockHttpClient.get(Uri.parse(MotelService.apiUrl))).thenAnswer(
-        (_) async => http.Response.bytes(mockResponse, 200,
+        (_) async => http.Response.bytes(utf8.encode(mockResponse), 200,
             headers: {"Content-Type": "application/json; charset=utf-8"}),
       );
 
-      expect(() => motelService.fetchMotels(), throwsA(isA<Exception>()));
+      // Verifica se a exceção lançada contém a mensagem correta
+      expect(
+        () async => await motelService.fetchMotels(),
+        throwsA(
+          isA<Exception>().having(
+              (e) => e.toString(),
+              'message',
+              contains(
+                  "A chave 'moteis' está presente, mas não contém uma lista válida")),
+        ),
+      );
     });
   });
 }
