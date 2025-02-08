@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import '../../data/models/suite_model.dart';
 
 class SuiteCard extends StatelessWidget {
@@ -51,12 +52,12 @@ class SuiteCard extends StatelessWidget {
                           fontSize: 18,
                         ),
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 2),
                   Text(
                     'A partir de R\$ ${suite.periodos.isNotEmpty ? suite.periodos.first.valor.toStringAsFixed(2) : '--'}',
                     style: const TextStyle(
-                      color: Colors.red,
-                      fontSize: 16,
+                    //  color: Color(0xFF480679),
+                      fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -69,94 +70,128 @@ class SuiteCard extends StatelessWidget {
     );
   }
 
-  void _showPeriodosDialog(BuildContext context, Suite suite) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(
+ void _showPeriodosDialog(BuildContext context, Suite suite) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
+            color: Colors.white,
           ),
-          child: Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.white,
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // Título estilizado
-                Text(
-                  'Períodos de ${suite.nome}',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Título estilizado
+              Text(
+                'Períodos de ${suite.nome}',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
                 ),
-                const SizedBox(height: 12),
+              ),
+              const SizedBox(height: 12),
 
-                // Lista de períodos
-                if (suite.periodos.isNotEmpty)
-                  ...suite.periodos.map((periodo) {
-                    return Column(
-                      children: [
-                        ListTile(
-                          title: Text(
-                            periodo.tempoFormatado,
-                            style: const TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w500),
+              // Tabela de períodos
+              if (suite.periodos.isNotEmpty)
+                DataTable(
+                  columnSpacing: 20, // Espaçamento entre as colunas
+                  columns: [
+                    DataColumn(
+                      label: Row(
+                        children: const [
+                          Icon(LucideIcons.clock, size: 18, color: Colors.blue), // Ícone de relógio
+                          SizedBox(width: 8), // Espaçamento entre ícone e texto
+                          Text(
+                            'Tempo',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
                           ),
-                          trailing: Text(
+                        ],
+                      ),
+                    ),
+                    DataColumn(
+                      label: Row(
+                        children: const [
+                          Icon(LucideIcons.wallet, size: 18, color: Colors.green), // Ícone de carteira
+                          SizedBox(width: 8), // Espaçamento entre ícone e texto
+                          Text(
+                            'Valor',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                  rows: suite.periodos.map((periodo) {
+                    return DataRow(
+                      cells: [
+                        DataCell(
+                          Text(
+                            periodo.tempoFormatado,
+                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        DataCell(
+                          Text(
                             'R\$ ${periodo.valor.toStringAsFixed(2)}',
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Colors.red,
+                              // color: Colors.red,
                             ),
                           ),
                         ),
-                        const Divider(), // Linha separadora entre os períodos
                       ],
                     );
-                  })
-                else
-                  const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 12),
-                    child: Text(
-                      'Nenhum período disponível.',
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
-                    ),
-                  ),
-
-                const SizedBox(height: 8),
-
-                // Botão de fechar estilizado
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.red,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 8),
-                    ),
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text(
-                      'Fechar',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
+                  }).toList(),
+                )
+              else
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 12),
+                  child: Text(
+                    'Nenhum período disponível.',
+                    style: TextStyle(fontSize: 16, color: Colors.grey),
                   ),
                 ),
-              ],
-            ),
+
+              const SizedBox(height: 8),
+
+              // Botão de fechar centralizado
+              Center( // Substitui Align por Center
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 8),
+                  ),
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text(
+                    'Fechar',
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                ),
+              ),
+            ],
           ),
-        );
-      },
-    );
-  }
+        ),
+      );
+    },
+  );
+}
 }
