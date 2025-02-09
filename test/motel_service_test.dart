@@ -44,9 +44,8 @@ void main() {
       }));
 
       when(mockHttpClient.get(Uri.parse(MotelService.apiUrl))).thenAnswer(
-        (_) async =>
-            http.Response.bytes(mockResponse, 200,
-                headers: {"Content-Type": "application/json; charset=utf-8"}),
+        (_) async => http.Response.bytes(mockResponse, 200,
+            headers: {"Content-Type": "application/json; charset=utf-8"}),
       );
 
       final result = await motelService.fetchMotels();
@@ -86,6 +85,164 @@ void main() {
                   "A chave 'moteis' está presente, mas não contém uma lista válida")),
         ),
       );
+    });
+
+    test('should return an empty list when the response has no motels',
+        () async {
+      final mockResponse = utf8.encode(json.encode({
+        "sucesso": true,
+        "data": {
+          "pagina": 1,
+          "qtdPorPagina": 10,
+          "totalSuites": 0,
+          "totalMoteis": 0,
+          "raio": 0,
+          "maxPaginas": 1.0,
+          "moteis": []
+        }
+      }));
+
+      when(mockHttpClient.get(Uri.parse(MotelService.apiUrl))).thenAnswer(
+        (_) async => http.Response.bytes(mockResponse, 200,
+            headers: {"Content-Type": "application/json; charset=utf-8"}),
+      );
+
+      final result = await motelService.fetchMotels();
+
+      expect(result, isA<List<MotelModel>>());
+      expect(result.isEmpty, true);
+    });
+
+    test('should handle motels with missing data', () async {
+      final mockResponse = utf8.encode(json.encode({
+        "sucesso": true,
+        "data": {
+          "pagina": 1,
+          "qtdPorPagina": 10,
+          "totalSuites": 0,
+          "totalMoteis": 1,
+          "raio": 0,
+          "maxPaginas": 1.0,
+          "moteis": [
+            {
+              "fantasia": "Motel Le Nid",
+              "bairro": "Chácara Flora - São Paulo",
+              "distancia": 28.27,
+              "qtdFavoritos": 0,
+              "suites": [],
+              "qtdAvaliacoes": 2159,
+              "media": 4.6,
+              "mensagem": []
+            }
+          ]
+        }
+      }));
+
+      when(mockHttpClient.get(Uri.parse(MotelService.apiUrl))).thenAnswer(
+        (_) async => http.Response.bytes(mockResponse, 200,
+            headers: {"Content-Type": "application/json; charset=utf-8"}),
+      );
+
+      final result = await motelService.fetchMotels();
+
+      expect(result, isA<List<MotelModel>>());
+      expect(result.length, 1);
+      expect(result[0].logo, '');
+    });
+
+    test('should throw exception when response contains invalid data',
+        () async {
+      final mockResponse = utf8.encode(json.encode({
+        "sucesso": true,
+        "data": {
+          "pagina": 1,
+          "qtdPorPagina": 10,
+          "totalSuites": 0,
+          "totalMoteis": 1,
+          "raio": 0,
+          "maxPaginas": 1.0,
+          "moteis": [
+            {
+              "fantasia": "Motel Le Nid",
+              "logo": "https://example.com/logo.gif",
+              "bairro": "Chácara Flora - São Paulo",
+              "distancia": "28.27",
+              "qtdFavoritos": 0,
+              "suites": [],
+              "qtdAvaliacoes": 2159,
+              "media": 4.6,
+              "mensagem": []
+            }
+          ]
+        }
+      }));
+
+      when(mockHttpClient.get(Uri.parse(MotelService.apiUrl))).thenAnswer(
+        (_) async => http.Response.bytes(mockResponse, 200,
+            headers: {"Content-Type": "application/json; charset=utf-8"}),
+      );
+
+      expect(
+        () async => await motelService.fetchMotels(),
+        throwsA(
+          isA<Exception>().having(
+            (e) => e.toString(),
+            'message',
+            contains("String' has no instance method 'toDouble'"),
+          ),
+        ),
+      );
+    });
+
+    test('should throw exception on request timeout', () async {
+      when(mockHttpClient.get(Uri.parse(MotelService.apiUrl))).thenAnswer(
+        (_) async => await Future.delayed(
+          const Duration(seconds: 10),
+          () => http.Response('Timeout', 408),
+        ),
+      );
+
+      expect(
+        () async => await motelService.fetchMotels(),
+        throwsA(isA<Exception>()),
+      );
+    });
+
+    test('should handle paginated response', () async {
+      final mockResponse = utf8.encode(json.encode({
+        "sucesso": true,
+        "data": {
+          "pagina": 1,
+          "qtdPorPagina": 10,
+          "totalSuites": 0,
+          "totalMoteis": 20,
+          "raio": 0,
+          "maxPaginas": 2.0,
+          "moteis": [
+            {
+              "fantasia": "Motel Le Nid",
+              "logo": "https://example.com/logo.gif",
+              "bairro": "Chácara Flora - São Paulo",
+              "distancia": 28.27,
+              "qtdFavoritos": 0,
+              "suites": [],
+              "qtdAvaliacoes": 2159,
+              "media": 4.6,
+              "mensagem": []
+            }
+          ]
+        }
+      }));
+
+      when(mockHttpClient.get(Uri.parse(MotelService.apiUrl))).thenAnswer(
+        (_) async => http.Response.bytes(mockResponse, 200,
+            headers: {"Content-Type": "application/json; charset=utf-8"}),
+      );
+
+      final result = await motelService.fetchMotels();
+
+      expect(result, isA<List<MotelModel>>());
+      expect(result.length, 1);
     });
   });
 }
