@@ -33,7 +33,6 @@ Para testar o aplicativo, baixe o APK diretamente do Google Drive:
 
 ## 📸 Capturas de Tela
 
-Aqui estão algumas imagens que mostram o fluxo do aplicativo:
 <div style="display: flex; flex-direction: row; justify-content: space-around;">
 
    <img src="assets/images/launcher.jpeg" alt="tela inicial" width="200" />  
