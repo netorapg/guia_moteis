@@ -1,16 +1,55 @@
-# guia_moteis
+# 🏨 Guia de Motéis
 
-A new Flutter project.
+Bem-vindo ao Guia de Motéis, o aplicativo perfeito para encontrar os melhores motéis da sua região! Com uma interface intuitiva e informações detalhadas, você pode explorar suítes, ver preços, horários e muito mais.
 
-## Getting Started
+## ✨ Funcionalidades Principais
 
-This project is a starting point for a Flutter application.
+- **Busca de Motéis**: Encontre motéis próximos com facilidade.
+- **Detalhes Completos**: Veja fotos, preços, horários e avaliações de cada suíte.
+- **Tabela de Preços**: Confira os valores de cada período de hospedagem.
+- **Interface Moderna**: Design limpo e fácil de usar.
 
-A few resources to get you started if this is your first Flutter project:
+## 🛠️ Tecnologias Utilizadas
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Flutter**: Framework para desenvolvimento multiplataforma.
+- **Dart**: Linguagem de programação utilizada.
+- **Lucide Icons**: Ícones modernos e elegantes.
+- **HTTP**: Para integração com APIs.
+- **Gradient AppBar**: Design personalizado com gradientes.
+- **Riverpod**: Para gerenciamento de estado eficiente.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📥 Como Baixar e Instalar o APK
+
+Para testar o aplicativo, baixe o APK diretamente do Google Drive:
+
+👉 [Baixar APK](https://drive.google.com/file/d/1kxDlCQhi0V0XM4q1skWLxW4e5NxwIgg8/view?usp=sharing)
+
+### Passos para Instalação:
+
+1. Baixe o arquivo APK no link acima.
+2. No seu dispositivo Android, vá até Configurações > Segurança e habilite a instalação de aplicativos de fontes desconhecidas.
+3. Localize o arquivo APK baixado e toque nele para instalar.
+4. Pronto! Agora você pode abrir o app e começar a usar.
+
+## 📸 Capturas de Tela
+
+Aqui estão algumas imagens que mostram o fluxo do aplicativo:
+
+- **Lancher do Aplicativo**  
+
+   <img src="assets/images/launcher.jpeg" alt="tela inicial" width="200" />
+  
+
+- **Tela Inicial - Lista de Motéis**  
+
+  <img src="assets/images/moteis.jpeg" alt="tela inicial" width="200" />
+
+- **Suítes Disponíveis**
+
+  <img src="assets/images/suites.jpeg" alt="tela inicial" width="200" />
+  
+
+- **Tabela de Preços** 
+
+  <img src="assets/images/periodo_valores.jpeg" alt="tela inicial" width="200" />
+
