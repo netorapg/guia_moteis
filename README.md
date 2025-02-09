@@ -34,22 +34,14 @@ Para testar o aplicativo, baixe o APK diretamente do Google Drive:
 ## 📸 Capturas de Tela
 
 Aqui estão algumas imagens que mostram o fluxo do aplicativo:
+<div style="display: flex; flex-direction: row; justify-content: space-around;">
 
-- **Lancher do Aplicativo**  
-
-   <img src="assets/images/launcher.jpeg" alt="tela inicial" width="200" />
-  
-
-- **Tela Inicial - Lista de Motéis**  
+   <img src="assets/images/launcher.jpeg" alt="tela inicial" width="200" />  
 
   <img src="assets/images/moteis.jpeg" alt="tela inicial" width="200" />
 
-- **Suítes Disponíveis**
-
   <img src="assets/images/suites.jpeg" alt="tela inicial" width="200" />
   
-
-- **Tabela de Preços** 
-
   <img src="assets/images/periodo_valores.jpeg" alt="tela inicial" width="200" />
 
+<div>
