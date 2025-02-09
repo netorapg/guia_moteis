@@ -4,8 +4,6 @@ import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
 import 'package:guia_moteis/data/services/motel_service.dart';
 import 'package:guia_moteis/data/models/motel_model.dart';
-
-// Importa o mock gerado automaticamente
 import 'mocks.mocks.dart';
 
 void main() {
@@ -35,11 +33,11 @@ void main() {
               "logo": "https://example.com/logo.gif",
               "bairro": "Chácara Flora - São Paulo",
               "distancia": 28.27,
-              "qtdFavoritos": 0, // ← Adicione este campo
-              "suites": [], // ← Adicione este campo
-              "qtdAvaliacoes": 2159, // ← Adicione este campo
-              "media": 4.6, // ← Adicione este campo
-              "mensagem": [] // ← Adicione este campo
+              "qtdFavoritos": 0,
+              "suites": [],
+              "qtdAvaliacoes": 2159,
+              "media": 4.6,
+              "mensagem": []
             }
           ]
         }
@@ -47,7 +45,7 @@ void main() {
 
       when(mockHttpClient.get(Uri.parse(MotelService.apiUrl))).thenAnswer(
         (_) async =>
-            http.Response.bytes(mockResponse, 200, // <--- Alteração aqui
+            http.Response.bytes(mockResponse, 200,
                 headers: {"Content-Type": "application/json; charset=utf-8"}),
       );
 
@@ -59,21 +57,18 @@ void main() {
     });
 
     test('should throw an exception when the response is an error', () async {
-      // Simula uma resposta de erro
       when(mockHttpClient.get(Uri.parse(MotelService.apiUrl))).thenAnswer(
         (_) async => http.Response('Not Found', 404),
       );
 
-      // Espera que o método lance uma exceção
       expect(() => motelService.fetchMotels(), throwsException);
     });
 
     test('should throw exception when response has invalid structure',
         () async {
-      // Simula uma resposta com estrutura inválida (moteis como string ao invés de lista)
       final mockResponse = json.encode({
         "sucesso": true,
-        "data": {"moteis": "não sou uma lista"} // Estrutura inválida
+        "data": {"moteis": "não sou uma lista"}
       });
 
       when(mockHttpClient.get(Uri.parse(MotelService.apiUrl))).thenAnswer(
@@ -81,7 +76,6 @@ void main() {
             headers: {"Content-Type": "application/json; charset=utf-8"}),
       );
 
-      // Verifica se a exceção lançada contém a mensagem correta
       expect(
         () async => await motelService.fetchMotels(),
         throwsA(

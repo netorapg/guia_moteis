@@ -12,7 +12,6 @@ class MotelDetailsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Garante que o estado seja atualizado APÓS o primeiro build
     Future.microtask(() {
       ref.read(suiteProvider.notifier).setSuites(motel.suites);
     });
@@ -22,6 +21,12 @@ class MotelDetailsScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(motel.fantasia),
+        titleTextStyle: TextStyle(
+          fontFamily: 'Kanit',
+          fontSize: 23,
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(

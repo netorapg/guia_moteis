@@ -14,7 +14,9 @@ class Suite {
   });
 
   factory Suite.fromJson(Map<String, dynamic> json) {
-    var periodosList = (json["periodos"] as List).map((periodoJson) => Periodo.fromJson(periodoJson)).toList();
+    var periodosList = (json["periodos"] as List)
+        .map((periodoJson) => Periodo.fromJson(periodoJson))
+        .toList();
 
     return Suite(
       nome: json["nome"] ?? "",

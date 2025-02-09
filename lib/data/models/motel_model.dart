@@ -6,7 +6,7 @@ class MotelModel {
   final String bairro;
   final double distancia;
   final List<Suite> suites;
-  final int avaliacoes; // Propriedade para armazenar a quantidade de avaliações
+  final int avaliacoes;
 
   MotelModel({
     required this.fantasia,
@@ -14,7 +14,7 @@ class MotelModel {
     required this.bairro,
     required this.distancia,
     required this.suites,
-    required this.avaliacoes, // Inicializa a nova propriedade
+    required this.avaliacoes,
   });
 
   factory MotelModel.fromJson(Map<String, dynamic> json) {
@@ -25,7 +25,7 @@ class MotelModel {
       bairro: json["bairro"] ?? "",
       distancia: (json["distancia"] ?? 0).toDouble(),
       suites: suitesData.map((suiteJson) => Suite.fromJson(suiteJson)).toList(),
-      avaliacoes: json["qtdAvaliacoes"] ?? 0, // Aqui extraímos a quantidade de avaliações
+      avaliacoes: json["qtdAvaliacoes"] ?? 0,
     );
   }
 

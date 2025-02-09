@@ -5,7 +5,6 @@ import '../../data/services/motel_service.dart';
 import '../../data/models/motel_model.dart';
 import '../widgets/motel_card.dart';
 
-// Provider responsável por buscar a lista de motéis
 final motelListProvider = FutureProvider<List<MotelModel>>((ref) async {
   return await MotelService().fetchMotels();
 });

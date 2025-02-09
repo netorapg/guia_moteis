@@ -10,9 +10,9 @@ class SuiteCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 4, // Elevação para dar destaque
+      elevation: 4,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16), // Bordas arredondadas
+        borderRadius: BorderRadius.circular(16),
       ),
       margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: InkWell(
@@ -33,8 +33,7 @@ class SuiteCard extends StatelessWidget {
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) => Container(
                   height: 180,
-                  color: Colors
-                      .grey[300], // Mostra um fundo cinza se a imagem falhar
+                  color: Colors.grey[300],
                   child: const Icon(Icons.broken_image,
                       size: 50, color: Colors.grey),
                 ),
@@ -56,7 +55,6 @@ class SuiteCard extends StatelessWidget {
                   Text(
                     'A partir de R\$ ${suite.periodos.isNotEmpty ? suite.periodos.first.valor.toStringAsFixed(2) : '--'}',
                     style: const TextStyle(
-                    //  color: Color(0xFF480679),
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),
@@ -70,128 +68,124 @@ class SuiteCard extends StatelessWidget {
     );
   }
 
- void _showPeriodosDialog(BuildContext context, Suite suite) {
-  showDialog(
-    context: context,
-    builder: (context) {
-      return Dialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
+  void _showPeriodosDialog(BuildContext context, Suite suite) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
-            color: Colors.white,
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Título estilizado
-              Text(
-                'Períodos de ${suite.nome}',
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black87,
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.white,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Períodos de ${suite.nome}',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 12),
-
-              // Tabela de períodos
-              if (suite.periodos.isNotEmpty)
-                DataTable(
-                  columnSpacing: 20, // Espaçamento entre as colunas
-                  columns: [
-                    DataColumn(
-                      label: Row(
-                        children: const [
-                          Icon(LucideIcons.clock, size: 18, color: Colors.blue), // Ícone de relógio
-                          SizedBox(width: 8), // Espaçamento entre ícone e texto
-                          Text(
-                            'Tempo',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
+                const SizedBox(height: 12),
+                if (suite.periodos.isNotEmpty)
+                  DataTable(
+                    columnSpacing: 20,
+                    columns: [
+                      DataColumn(
+                        label: Row(
+                          children: const [
+                            Icon(LucideIcons.clock,
+                                size: 18, color: Colors.blue),
+                            SizedBox(width: 8),
+                            Text(
+                              'Tempo',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      DataColumn(
+                        label: Row(
+                          children: const [
+                            Icon(LucideIcons.wallet,
+                                size: 18, color: Colors.green),
+                            SizedBox(width: 8),
+                            Text(
+                              'Valor',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                    rows: suite.periodos.map((periodo) {
+                      return DataRow(
+                        cells: [
+                          DataCell(
+                            Text(
+                              periodo.tempoFormatado,
+                              style: const TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          DataCell(
+                            Text(
+                              'R\$ ${periodo.valor.toStringAsFixed(2)}',
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ],
-                      ),
+                      );
+                    }).toList(),
+                  )
+                else
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 12),
+                    child: Text(
+                      'Nenhum período disponível.',
+                      style: TextStyle(fontSize: 16, color: Colors.grey),
                     ),
-                    DataColumn(
-                      label: Row(
-                        children: const [
-                          Icon(LucideIcons.wallet, size: 18, color: Colors.green), // Ícone de carteira
-                          SizedBox(width: 8), // Espaçamento entre ícone e texto
-                          Text(
-                            'Valor',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ],
+                  ),
+                const SizedBox(height: 8),
+                Center(
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
                       ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 8),
                     ),
-                  ],
-                  rows: suite.periodos.map((periodo) {
-                    return DataRow(
-                      cells: [
-                        DataCell(
-                          Text(
-                            periodo.tempoFormatado,
-                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        DataCell(
-                          Text(
-                            'R\$ ${periodo.valor.toStringAsFixed(2)}',
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              // color: Colors.red,
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  }).toList(),
-                )
-              else
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 12),
-                  child: Text(
-                    'Nenhum período disponível.',
-                    style: TextStyle(fontSize: 16, color: Colors.grey),
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text(
+                      'Fechar',
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
                   ),
                 ),
-
-              const SizedBox(height: 8),
-
-              // Botão de fechar centralizado
-              Center( // Substitui Align por Center
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.red,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 8),
-                  ),
-                  onPressed: () => Navigator.pop(context),
-                  child: const Text(
-                    'Fechar',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      );
-    },
-  );
-}
+        );
+      },
+    );
+  }
 }

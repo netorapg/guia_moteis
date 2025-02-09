@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import '../../data/models/motel_model.dart';
-import '../screens/motel_details_screen.dart';
+import '../screens/suites_screen.dart';
 
 class MotelCard extends StatelessWidget {
   final MotelModel motel;
@@ -10,7 +10,6 @@ class MotelCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Calcula menor e maior preço das suítes
     double? minPrice;
     double? maxPrice;
 
@@ -21,7 +20,7 @@ class MotelCard extends StatelessWidget {
         if (suite.periodos != null && suite.periodos.isNotEmpty) {
           for (var periodo in suite.periodos) {
             if (periodo.valor != null) {
-              prices.add(periodo.valor!); // Adicionando o preço do período
+              prices.add(periodo.valor!);
             }
           }
         }
@@ -51,7 +50,6 @@ class MotelCard extends StatelessWidget {
           padding: const EdgeInsets.all(12),
           child: Row(
             children: [
-              // Logo do motel
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.network(
@@ -67,14 +65,13 @@ class MotelCard extends StatelessWidget {
                         color: Colors.grey[300],
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: const Icon(Icons.image_not_supported, color: Colors.grey),
+                      child: const Icon(Icons.image_not_supported,
+                          color: Colors.grey),
                     );
                   },
                 ),
               ),
               const SizedBox(width: 12),
-
-              // Informações do motel
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,15 +81,16 @@ class MotelCard extends StatelessWidget {
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.bold,
                           ),
-                      overflow: TextOverflow.ellipsis, // Truncar o texto
+                      overflow: TextOverflow.ellipsis,
                     ),
-                       const SizedBox(height: 1), // Espaço entre as informações e as avaliações
+                    const SizedBox(height: 1),
                     Row(
                       children: [
-                        const Icon(LucideIcons.star, size: 16, color: Colors.amber),
+                        const Icon(LucideIcons.star,
+                            size: 16, color: Colors.amber),
                         const SizedBox(width: 4),
                         Text(
-                          '${motel.avaliacoes} Avaliações', // Quantidade de avaliações
+                          '${motel.avaliacoes} Avaliações',
                           style: const TextStyle(color: Colors.grey),
                         ),
                       ],
@@ -100,31 +98,34 @@ class MotelCard extends StatelessWidget {
                     const SizedBox(height: 8),
                     Row(
                       children: [
-                        const Icon(LucideIcons.mapPin, size: 16, color: Colors.grey),
+                        const Icon(LucideIcons.mapPin,
+                            size: 16, color: Color.fromARGB(255, 221, 7, 7)),
                         const SizedBox(width: 4),
                         Text(
                           motel.bairro,
                           style: const TextStyle(color: Colors.grey),
-                          overflow: TextOverflow.ellipsis, // Truncar o texto
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
                     const SizedBox(height: 4),
                     Row(
                       children: [
-                        const Icon(LucideIcons.navigation, size: 16, color: Colors.grey),
+                        const Icon(LucideIcons.navigation,
+                            size: 16, color: Colors.grey),
                         const SizedBox(width: 4),
                         Text(
                           '${motel.distancia} km',
                           style: const TextStyle(color: Colors.grey),
-                          overflow: TextOverflow.ellipsis, // Truncar o texto
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
                     const SizedBox(height: 4),
                     Row(
                       children: [
-                        const Icon(LucideIcons.wallet, size: 16, color: Colors.green),
+                        const Icon(LucideIcons.wallet,
+                            size: 16, color: Colors.green),
                         const SizedBox(width: 4),
                         Flexible(
                           child: Text(
@@ -132,22 +133,22 @@ class MotelCard extends StatelessWidget {
                                 ? 'Suítes entre R\$${minPrice.toStringAsFixed(2)} e R\$${maxPrice.toStringAsFixed(2)}'
                                 : 'Valores não informados',
                             style: TextStyle(
-                              color: minPrice != null ? Colors.black : Colors.grey,
-                              fontWeight: FontWeight.w500, fontSize: 12,
+                              color:
+                                  minPrice != null ? Colors.black : Colors.grey,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 12,
                             ),
-                            overflow: TextOverflow.ellipsis, // Truncar o texto
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ],
                     ),
-                 
                   ],
                 ),
               ),
-
-              // Botão "Ver mais"
               IconButton(
-                icon: const Icon(Icons.arrow_forward_ios_rounded, size: 20, color: Colors.redAccent),
+                icon: const Icon(Icons.arrow_forward_ios_rounded,
+                    size: 20, color: Colors.redAccent),
                 onPressed: () {
                   Navigator.push(
                     context,

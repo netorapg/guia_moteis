@@ -1,4 +1,3 @@
-
 class Periodo {
   final String tempoFormatado;
   final double valor;

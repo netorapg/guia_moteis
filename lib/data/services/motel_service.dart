@@ -23,7 +23,6 @@ class MotelService {
         if (data.containsKey("data") && data["data"] is Map<String, dynamic>) {
           final dynamic motelsData = data["data"]["moteis"];
 
-          // Verifica se motelsData é realmente uma lista
           if (motelsData is List) {
             return MotelModel.fromJsonList(motelsData);
           } else {
