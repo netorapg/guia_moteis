@@ -17,11 +17,9 @@ class MotelCard extends StatelessWidget {
       List<double> prices = [];
 
       for (var suite in motel.suites) {
-        if (suite.periodos != null && suite.periodos.isNotEmpty) {
+        if (suite.periodos.isNotEmpty) {
           for (var periodo in suite.periodos) {
-            if (periodo.valor != null) {
-              prices.add(periodo.valor!);
-            }
+            prices.add(periodo.valor);
           }
         }
       }
