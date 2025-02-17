@@ -2,6 +2,11 @@
 
 Bem-vindo ao Guia de Motéis, o aplicativo perfeito para encontrar os melhores motéis da sua região! Com uma interface intuitiva e informações detalhadas, você pode explorar suítes, ver preços, horários e muito mais.
 
+📽️ Demonstração do Projeto
+Assista ao vídeo de demonstração no YouTube clicando no link abaixo:
+
+🔗 Ver no YouTube
+
 ## ✨ Funcionalidades Principais
 
 - **Busca de Motéis**: Encontre motéis próximos com facilidade.
