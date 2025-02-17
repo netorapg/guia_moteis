@@ -4,7 +4,7 @@ Bem-vindo ao Guia de Motéis, o aplicativo perfeito para encontrar os melhores m
 
 ## 📽️ Demonstração do Projeto  
 
-![Demonstração](assets/Vídeo-do-WhatsApp-de-2025-02-17-à_s_-20.32.04_dbbd0145.gif)
+<img src="assets/Vídeo-do-WhatsApp-de-2025-02-17-à_s_-20.32.04_dbbd0145.gif" width="200"/>
 
 
 🔗 [Ver no YouTube](https://youtube.com/shorts/Vf8eaUwQLtE?si=Ld3Zy9qTWJOnk9Vc)
